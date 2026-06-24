@@ -1,0 +1,716 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rowdies:wght@400;700&display=swap');
+
+/* Configurações Gerais e Resets */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+body {
+    background: transparent;
+    font-family: 'Press Start 2P', monospace;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Moldura Principal do Stash */
+.stash-container {
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    border: 4px solid #3d3d3d;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    image-rendering: pixelated;
+}
+
+/* Cabeçalho do Baú */
+.stash-header {
+    background: linear-gradient(180deg, #591212 0%, #290808 100%);
+    border-bottom: 4px solid #140404;
+    padding: 4px;
+    position: relative;
+    height: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Decoração superior com o Baú Dourado */
+.header-decoration {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 32px;
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    border: 3px solid #4d4d4d;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+/* Efeito Pixel do Baú */
+.header-chest {
+    width: 20px;
+    height: 16px;
+    background-color: #e0a914;
+    border: 2px solid #5a4103;
+    position: relative;
+    box-shadow: inset 0 2px 0 #ffd768;
+}
+.header-chest::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    width: 4px;
+    height: 4px;
+    background-color: #5a4103;
+}
+
+/* Banner de Texto STASH */
+.header-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.banner-title {
+    font-family: 'Rowdies', cursive;
+    font-size: 24px;
+    color: #e0a914;
+    text-shadow: 2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000;
+    letter-spacing: 2px;
+}
+
+/* Botão Fechar */
+.close-btn {
+    position: absolute;
+    right: 8px;
+    top: -24px;
+    width: 28px;
+    height: 28px;
+    background-color: #9c2517;
+    border: 2px solid #ff7769;
+    color: #ffffff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 1px 1px 0px #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.1s;
+}
+.close-btn:hover {
+    background-color: #c93524;
+}
+
+/* Botão Minimizar */
+.minimize-btn {
+    position: absolute;
+    right: 40px;
+    top: -24px;
+    width: 28px;
+    height: 28px;
+    background-color: #333333;
+    border: 2px solid #555555;
+    color: #ffffff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 1px 1px 0px #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.1s;
+}
+.minimize-btn:hover {
+    background-color: #555555;
+}
+
+/* Abas de Navegação (Madeira) */
+.stash-tabs {
+    display: flex;
+    background-color: #0e0e0e;
+    padding: 6px 6px 0 6px;
+    gap: 2px;
+}
+
+.tab-btn {
+    flex: 1;
+    height: 32px;
+    background: linear-gradient(180deg, #6b3f17 0%, #3d2109 100%);
+    border: 2px solid #a86c36;
+    border-bottom: none;
+    color: #ffdca3;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s;
+}
+
+.tab-btn:hover {
+    background: linear-gradient(180deg, #7c4c20 0%, #4c2c10 100%);
+    color: #ffffff;
+}
+
+.tab-btn.active {
+    background: linear-gradient(180deg, #c28834 0%, #825414 100%);
+    border-color: #ffd79c;
+    color: #ffffff;
+    height: 36px;
+    margin-top: -4px;
+    box-shadow: 0 -2px 5px rgba(255, 215, 156, 0.3);
+}
+
+/* Conteúdo das Abas e Moldura Central */
+.stash-grid-container {
+    flex: 1;
+    background-color: #121212;
+    border: 4px solid #282828;
+    margin: 6px;
+    position: relative;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-panel {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+}
+
+.tab-panel.active {
+    display: flex;
+}
+
+.tab-intro-text {
+    font-size: 8px;
+    color: #888888;
+    text-align: center;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px #000;
+}
+
+/* Cheats Custom List (Alternadores) */
+.cheat-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.cheat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 12px;
+    border: 2px solid #2b2b2b;
+    border-radius: 4px;
+    transition: border-color 0.1s;
+}
+.cheat-row:hover {
+    border-color: #c28834;
+}
+
+.cheat-row.flex-column {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.cheat-label {
+    font-size: 8px;
+    color: #ffdfa3;
+    line-height: 1.6;
+    text-shadow: 1px 1px 0px #000;
+}
+.cheat-label small {
+    font-size: 6px;
+    color: #888888;
+}
+
+/* Switch Toggle Customizado */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 22px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: .2s;
+    border: 2px solid #222;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #999;
+    transition: .2s;
+}
+
+input:checked + .slider {
+    background-color: #825414;
+    border-color: #ffd79c;
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+    background-color: #ffd79c;
+}
+
+/* Slider de Speedhack */
+.range-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+    background-color: #0e0e0e;
+    padding: 6px 12px;
+    border: 2px solid #222;
+}
+
+input[type="range"] {
+    flex: 1;
+    accent-color: #ffd79c;
+    cursor: pointer;
+}
+
+#speedVal {
+    font-size: 8px;
+    color: #ffd79c;
+    min-width: 40px;
+    text-align: right;
+    text-shadow: 1px 1px 0px #000;
+}
+
+/* Painel do Spawner Adaptado */
+.spawner-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-label {
+    font-size: 7px;
+    color: #888888;
+    text-shadow: 1px 1px 0px #000;
+}
+
+.retro-select {
+    background-color: #1a1a1a;
+    border: 2px solid #3d2109;
+    color: #ffdca3;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    padding: 8px;
+    outline: none;
+    cursor: pointer;
+    border-radius: 2px;
+    width: 100%;
+}
+.retro-select:focus {
+    border-color: #c28834;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(180deg, #6b3f17 0%, #3d2109 100%);
+    border: 2px solid #a86c36;
+    color: #ffdca3;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.qty-btn:hover {
+    background: linear-gradient(180deg, #7c4c20 0%, #4c2c10 100%);
+}
+
+.retro-input {
+    flex: 1;
+    height: 30px;
+    background-color: #0e0e0e;
+    border: 2px solid #333;
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    text-align: center;
+    outline: none;
+}
+.retro-input:focus {
+    border-color: #c28834;
+}
+
+/* Item ID row (input + wiki button lado a lado) */
+.item-id-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.item-id-input {
+    flex: 1;
+    height: 34px;
+    text-align: left;
+    padding: 0 8px;
+    font-size: 9px;
+    user-select: text;
+    -webkit-user-select: text;
+}
+
+/* Remove setas do input number */
+.item-id-input::-webkit-inner-spin-button,
+.item-id-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.wiki-btn {
+    height: 34px;
+    padding: 0 10px;
+    background: linear-gradient(180deg, #1a3a6b 0%, #0d1f3d 100%);
+    border: 2px solid #4a7fc1;
+    color: #7dc4ff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-shadow: 1px 1px 0px #000;
+    transition: all 0.15s;
+}
+.wiki-btn:hover {
+    background: linear-gradient(180deg, #1e4d8c 0%, #112a52 100%);
+    border-color: #a0d4ff;
+    color: #ffffff;
+    box-shadow: 0 0 8px rgba(122, 196, 255, 0.3);
+}
+
+.wiki-hint {
+    font-size: 6px;
+    color: #555;
+    font-family: 'Press Start 2P', monospace;
+    text-shadow: 1px 1px 0px #000;
+    line-height: 1.6;
+}
+
+/* Botão de Spawnar (Estilo Madeira de Ação) */
+.spawn-action-btn {
+    margin-top: auto;
+    height: 44px;
+    background: linear-gradient(180deg, #592e19 0%, #361a0d 100%);
+    border: 2px solid #7c4627;
+    color: #e0a47e;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    text-shadow: 1px 1px 0px #000;
+    transition: all 0.1s;
+}
+.spawn-action-btn:hover {
+    background: linear-gradient(180deg, #6b3b22 0%, #452414 100%);
+    color: #ffffff;
+    border-color: #ffd79c;
+}
+
+/* Configs, Status e Conexão */
+.about-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 16px;
+}
+
+.status-box, .credits-box {
+    background-color: #1a1a1a;
+    border: 2px solid #2b2b2b;
+    padding: 12px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.status-title, .credits-title {
+    font-size: 8px;
+    color: #888888;
+    margin-bottom: 8px;
+}
+
+#gameStatus {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.status-connected {
+    color: #4caf50;
+    text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+}
+.status-disconnected {
+    color: #f44336;
+    text-shadow: 0 0 5px rgba(244, 67, 54, 0.4);
+}
+
+.action-btn {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(180deg, #6b3f17 0%, #3d2109 100%);
+    border: 2px solid #a86c36;
+    color: #ffdca3;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    cursor: pointer;
+    text-shadow: 1px 1px 0px #000;
+}
+.action-btn:hover {
+    background: linear-gradient(180deg, #7c4c20 0%, #4c2c10 100%);
+    color: #ffffff;
+}
+
+.credits-box p {
+    font-size: 7px;
+    color: #ccc;
+    line-height: 1.8;
+}
+
+/* Rodapé */
+.stash-footer {
+    height: 32px;
+    background-color: #0e0e0e;
+    border-top: 2px solid #222;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Empurra os itens para as extremidades opostas */
+    padding: 0 14px;
+}
+
+.footer-status-text {
+    font-size: 7px;
+    color: #888;
+}
+
+.footer-version-text {
+    font-size: 7px;
+    color: #ffdca3; /* Cor dourada sutil para destacar a versão */
+    font-family: monospace;
+}
+
+.footer-version-t2ext {
+    font-size: 11px;
+    color: #ffdca3; /* Cor dourada sutil para destacar a versão */
+    font-family: monospace;
+}
+
+.discord-footer-btn {
+    color: #888;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s, transform 0.1s;
+    cursor: pointer;
+}
+.discord-footer-btn:hover {
+    color: #5865F2;
+    transform: scale(1.1);
+}
+.discord-footer-btn:active {
+    transform: scale(0.95);
+}
+/* Notificação Toast */
+.toast {
+    visibility: hidden;
+    min-width: 240px;
+    background-color: #111;
+    border: 2px solid #c28834;
+    color: #fff;
+    text-align: center;
+    padding: 12px;
+    position: fixed;
+    z-index: 200;
+    bottom: 30px;
+    font-size: 7px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+    left: 50%;
+    transform: translateX(-50%);
+}
+.toast.show {
+    visibility: visible;
+    animation: fadein 0.3s, fadeout 0.3s 2.5s;
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+/* Painel de Ativação */
+.activation-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 24px;
+    background-color: #121212;
+    border: 4px solid #282828;
+    margin: 6px;
+    gap: 16px;
+    text-align: center;
+}
+
+.activation-title {
+    font-family: 'Rowdies', cursive;
+    font-size: 18px;
+    color: #e0a914;
+    text-shadow: 2px 2px 0px #000;
+    letter-spacing: 1px;
+}
+
+.activation-desc {
+    font-size: 8px;
+    color: #888888;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    text-shadow: 1px 1px #000;
+}
+
+.activation-input {
+    width: 100%;
+    height: 40px;
+    font-size: 10px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid #3d2109;
+    background-color: #0c0c0c;
+    color: #ffdca3;
+    padding: 0 8px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+}
+
+.activation-input:focus {
+    border-color: #c28834;
+}
+
+.activation-action-btn {
+    width: 100%;
+    height: 44px;
+    background: linear-gradient(180deg, #592e19 0%, #361a0d 100%);
+    border: 2px solid #7c4627;
+    color: #ffdca3;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    text-shadow: 1px 1px 0px #000;
+    transition: all 0.1s;
+    box-shadow: 1px 1px 0 #000;
+}
+
+.activation-action-btn:hover {
+    background: linear-gradient(180deg, #6b3b22 0%, #452414 100%);
+    color: #ffffff;
+    border-color: #ffd79c;
+}
+
+.activation-action-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+}
+
+.hwid-display {
+    margin-top: auto;
+    font-size: 7px;
+    color: #666666;
+    border-top: 1px dashed #222;
+    padding-top: 12px;
+    width: 100%;
+    word-break: break-all;
+    font-family: monospace;
+}
+
+/* Estilo do Scrollbar Customizado */
+textarea::-webkit-scrollbar {
+    width: 6px;
+}
+textarea::-webkit-scrollbar-track {
+    background: #0c0c0c;
+}
+textarea::-webkit-scrollbar-thumb {
+    background: #3d2109;
+    border: 1px solid #a86c36;
+    border-radius: 2px;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+    background: #592e19;
+}
+
+.license-days-header {
+    font-size: 7px;
+    color: #4caf50;
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 2px;
+    text-shadow: 1px 1px 0px #000;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskbarHero Trainer</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+    <div class="stash-container">
+        <!-- Cabeçalho temático do Trainer -->
+        <div class="stash-header" id="dragHeader">
+            <div class="header-decoration">
+                <div class="header-chest"></div>
+            </div>
+            <div class="header-banner">
+                <span class="banner-title">TBH XING MASTER</span>
+                <button class="minimize-btn" id="minimizeBtn">_</button>
+                <button class="close-btn" id="closeBtn">X</button>
+            </div>
+            <div id="lblLicenseDays" class="license-days-header"></div>
+        </div>
+
+        <!-- Tela de Ativação (Visível por padrão até verificar a licença) -->
+        <div id="activationContainer" class="activation-panel">
+            <div class="activation-title">ATIVAR LICENÇA</div>
+            <p class="activation-desc">Insira sua chave vitalícia para liberar o acesso ao trainer:</p>
+            <input type="text" id="txtActivationKey" placeholder="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX" class="retro-input activation-input" />
+            <button id="btnActivate" class="activation-action-btn">🔑 ATIVAR AGORA</button>
+            <div class="hwid-display">SEU HWID: <span id="lblHwid" style="color: #ffdca3;">Carregando...</span></div>
+        </div>
+
+        <!-- Conteúdo do Trainer (Oculto por padrão até validar) -->
+        <div id="trainerContent" style="display: none; flex-direction: column; flex: 1;">
+            <!-- Abas do Menu adaptadas para as funções -->
+            <div class="stash-tabs">
+                <button class="tab-btn active" data-tab="1">CHEATS</button>
+                <button class="tab-btn" data-tab="2">SPAWNER</button>
+                <button class="tab-btn" data-tab="3">STATUS</button>
+                <button class="tab-btn" data-tab="4">CONFIG</button>
+                <button class="tab-btn" data-tab="5">ATUALIZAR</button>
+            </div>
+
+            <!-- Conteúdo do Painel Central -->
+            <div class="stash-grid-container">
+                <div class="decorative-border-left"></div>
+                <div class="decorative-border-right"></div>
+                
+                <!-- Painel 1: Trapaças Principais -->
+                <div class="tab-panel active" id="panel-1">
+                    <div class="tab-intro-text">MODIFICADORES DE SISTEMA</div>
+                    <div class="cheat-list-container">
+                        <div class="cheat-row">
+                            <span class="cheat-label">🔓 DLC Unlocker<br /><small>Libera Personagens DLC</small></span>
+                            <label class="switch">
+                                <input type="checkbox" id="chkDlc" />
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="cheat-row">
+                            <span class="cheat-label">🐱 Liberar Pets<br /><small>Libera todos os companheiros</small></span>
+                            <label class="switch">
+                                <input type="checkbox" id="chkPets" />
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="cheat-row">
+                            <span class="cheat-label">🪙 Ouro Infinito (Hack)<br /><small>Multiplica ouro coletado</small></span>
+                            <label class="switch">
+                                <input type="checkbox" id="chkGold" />
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="cheat-row">
+                            <span class="cheat-label">✨ Experiência Máxima<br /><small>EXP multiplicada por 1.000.000</small></span>
+                            <label class="switch">
+                                 <input type="checkbox" id="chkExp" />
+                                 <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="cheat-row">
+                            <span class="cheat-label">👹 Apenas Bosses (Waves)<br /><small>Substitui monstros normais por bosses</small></span>
+                            <label class="switch">
+                                 <input type="checkbox" id="chkBoss" />
+                                 <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Painel 2: Item Spawner Adaptado -->
+                <div class="tab-panel" id="panel-2">
+                    <div class="tab-intro-text">GERADOR DE ITENS (SPAWNER)</div>
+                    <div class="spawner-container">
+                        <div class="form-group">
+                            <label class="form-label">CATEGORIA DO ITEM</label>
+                            <select id="selCategory" class="retro-select">
+                                <option value="0">Consumíveis &amp; Pedras</option>
+                                <option value="1">Equipamentos &amp; Armas</option>
+                                <option value="2">Outros Itens</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">ID DO ITEM</label>
+                            <div class="item-id-row">
+                                <input type="number" id="txtItemId" class="retro-input item-id-input" placeholder="Ex: 319141" min="1" />
+                                <button type="button" class="wiki-btn" id="btnViewItems">🌐 VER ITENS</button>
+                            </div>
+                            <p class="wiki-hint">Consulte o ID na wiki oficial do jogo</p>
+                        </div>
+
+                        <button class="spawn-action-btn" id="btnSpawnItem">⚡ GERAR ITEM AGORA! ⚡</button>
+                    </div>
+                </div>
+
+                <!-- Painel 3: Combate & Status -->
+                <div class="tab-panel" id="panel-3">
+                    <div class="tab-intro-text">COMBATE E VELOCIDADE</div>
+                    <div class="cheat-list-container">
+                        <div class="cheat-row">
+                            <span class="cheat-label">🛡️ MODO DEUS (GOD)<br /><small>Vida Infinita Ativada</small></span>
+                            <label class="switch">
+                                <input type="checkbox" id="chkGod" />
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="cheat-row">
+                            <span class="cheat-label">⚔️ ONE HIT KILL<br /><small>Dano massivo contra inimigos</small></span>
+                            <label class="switch">
+                                <input type="checkbox" id="chkOhk" />
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="cheat-row">
+                            <span class="cheat-label">⚡ VELOCIDADE DO JOGO (SPEEDHACK)<br /><small>Acelera o jogo em 2.5x</small></span>
+                            <label class="switch">
+                                <input type="checkbox" id="chkSpeed" />
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Painel 4: Conexão e Créditos -->
+                <div class="tab-panel" id="panel-4">
+                    <div class="tab-intro-text">SISTEMA &amp; INFORMAÇÕES</div>
+                    <div class="about-container">
+                        <div class="status-box">
+                            <p class="status-title">STATUS DO PROCESSO</p>
+                            <p id="gameStatus" class="status-disconnected">DESCONECTADO</p>
+                        </div>
+                        <button class="action-btn" id="btnReconnect">FORÇAR RECONEXÃO</button>
+                        
+                        <div style="margin-top: 10px; display: flex; flex-direction: column;">
+                            <button class="action-btn" id="btnSpeedLog" style="background-color: #3f51b5; width: 100%;">VER LOG DE ATUALIZAÇÂO</button>
+                            <textarea id="txtSpeedLog" readonly="readonly" style="width: 100%; height: 100px; background-color: #111; color: #4caf50; border: 1px solid #333; font-family: monospace; font-size: 10px; margin-top: 5px; display: none;"></textarea>
+                        </div>
+
+                        <div class="credits-box">
+                            <p class="credits-title">TBH: TRAINER BEST HACK</p>
+                            <p>Desenvolvido por Defsec e Xingling</p>
+                            <p>Brazilian Modz 🏴󠁧󠁢󠁥󠁮󠁧󠁿</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Painel 5: Atualização Automática -->
+                <div class="tab-panel" id="panel-5">
+                    <div class="tab-intro-text">ATUALIZAÇÃO DO TRAINER</div>
+                    <div class="about-container">
+                        <div class="status-box">
+                            <p class="status-title">STATUS DA VERSÃO</p>
+                            <p id="lblUpdateStatus" style="font-size: 8px; color: #ffdca3; font-weight: bold; line-height: 1.4;">Aguardando verificação...</p>
+                        </div>
+                        
+                        <button class="action-btn" id="btnCheckUpdate">🔍 VERIFICAR ATUALIZAÇÕES</button>
+                        
+                        <div id="updateInfoContainer" style="display: none; flex-direction: column; gap: 10px; width: 100%;">
+                            <div class="credits-box" style="text-align: left; padding: 8px;">
+                                <p class="credits-title" style="margin-bottom: 4px; text-align: left;">NOVIDADES DA VERSÃO:</p>
+                                <textarea id="txtChangelog" readonly="readonly" style="width: 100%; height: 90px; background-color: #0c0c0c; color: #4caf50; border: 2px solid #3d2109; font-family: monospace; font-size: 8px; resize: none; padding: 6px; box-sizing: border-box; outline: none;"></textarea>
+                            </div>
+                            
+                            <button class="spawn-action-btn" id="btnStartUpdate" style="width: 100%; height: 38px;">⚡ BAIXAR E INSTALAR ⚡</button>
+                            
+                            <!-- Barra de progresso -->
+                            <div id="progressContainer" style="display: none; flex-direction: column; width: 100%; gap: 4px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 7px; color: #aaa;">
+                                    <span>Progresso:</span>
+                                    <span id="lblProgressPercent">0%</span>
+                                </div>
+                                <div style="width: 100%; height: 10px; background-color: #0c0c0c; border: 2px solid #333; position: relative;">
+                                    <div id="progressBarFill" style="width: 0%; height: 100%; background-color: #ffdca3;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- Fim de stash-grid-container -->
+        </div> <!-- Fim de trainerContent -->
+
+        <!-- Rodapé Estilizado -->
+        <div class="stash-footer">
+            <span class="footer-status-text">Trainer Status: <span id="footerConnectionState" style="color: #f44336;">Offline</span></span>
+            <a href="#" id="btnDiscord" class="discord-footer-btn" title="Entrar no Discord">
+                <svg width="16" height="16" viewBox="0 0 127.14 96.36" fill="currentColor">
+                    <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a77.7,77.7,0,0,0,6.63-10.85,68.43,68.43,0,0,1-10.5-5c.9-.65,1.76-1.34,2.58-2.06a75.48,75.48,0,0,0,73,0c.82.72,1.68,1.41,2.58,2.06a68.43,68.43,0,0,1-10.5,5,77.7,77.7,0,0,0,6.63,10.85,105.73,105.73,0,0,0,31-18.83C129.87,49.67,123.63,26.9,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.83,46,53.83,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.07,46,96.07,53,91,65.69,84.69,65.69Z"/>
+                </svg>
+            </a>
+            <span id="lblFooterVersion" class="footer-version-t2ext">v1.0.3</span>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast"></div>
+
+    <script src="index.js"></script>
+</body>
+</html>
